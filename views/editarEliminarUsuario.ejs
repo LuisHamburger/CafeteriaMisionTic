@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/inicio-administrador.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <title>Administrador</title>
+</head>
+
+<div class="contenedor">
+    <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
+   
+
+    <div class="registro-usuario" >
+        <% let nom = elemento.nombre %>
+            <% let corr = elemento.correo %>
+            <% let roll = elemento.rol %>            
+            <% refA = "/actualizar/"+elemento.id  %>
+        <form class="registro-usuario__form"  method="POST" action=<%=refA%>>
+            
+            <h1 class="registro-usuario__form__titulo">Editar de Usuario</h1>
+            <input class="registro-usuario__form__input" type="text" name="name" placeholder="Nombre del Usuario" required value=<%=nom%>>
+            <input class="registro-usuario__form__input" type="email" name="email" placeholder="Correo del Usuario" required value=<%=corr%>>
+            <select name="rol" id="" required value=<%=roll%>>
+                <option value="Admin">Administrador</option>
+                <option value="User">Usuario</option>
+            </select>
+                <button class="registro-usuario__form__btnRegistrar" type="submit">Actualizar</button>          
+        </form>
+    </div>
+    <footer>
+        <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web <br> &copy; 2021</p>
+    </footer>
+</div>
+

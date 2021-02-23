@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/dec7d290de.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/inicio-administrador.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <title>Administrador</title>
+</head>
+
+<div class="contenedor">
+    <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
+    
+    <div class="contenedorAdminUsuario">
+        <div class="contenedorAdminUsuario_caja">
+            <form class="contenedorAdminUsuario__busqueda" action="" method="GET">
+                <input class="contenedorAdminUsuario__input" type="text" placeholder="Usuario" name="valor">
+                <button class="contenedorAdminUsuario__bntBuscar" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <a href="/nuevoUsuario"><button class="contenedorAdminUsuario__bntAgregarUsuario">Agregar Usuario <i class="fas fa-plus-circle"></i></button></a>
+        </div>
+       
+        <div class="contenedorAdminUsuario__encontrados">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre </th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Acci&oacute;n</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% for(let dato in arrayFilas){ %>
+                    <tr>
+                        <td> <%= arrayFilas[dato].nombre %></td>
+                        <td> <%= arrayFilas[dato].correo %></td>
+                        <% if(arrayFilas[dato].rol == "Admin"){%>
+                        <td>Administrador</td>
+                        <% } else{%>
+                        <td>Usuario</td>
+                        <% }; refA = "/actualizarEliminarUsuario/"+arrayFilas[dato].id %>
+                        <% refE = "/eliminar/"+arrayFilas[dato].id %>
+                        <td> <a class="enlace_actualizar" href =<%=refA%> >Actualizar</a>
+                        <a class="enlace_eliminar" href =<%=refE%> >Eliminar</a></td>
+                    </tr>
+                    <% } %>
+ 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web <br> &copy; 2021</p>
+    </footer>
+</div>
