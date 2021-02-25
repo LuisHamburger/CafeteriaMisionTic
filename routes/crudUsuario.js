@@ -1,5 +1,5 @@
 var express = require('express');
-const { render } = require('../app');
+const { render, response } = require('../app');
 var router = express.Router();
 const sqlite3 = require("sqlite3");
 
@@ -13,7 +13,7 @@ let db = new sqlite3.Database('./public/javascripts/database/db.db', (error)=>{
 });
 
 router.get('/nuevoUsuario', function(req, res) {
-    res.render("registro-usuarios")
+    res.render("Administrador/registro-usuarios")
 });
 
 router.get('/actualizarEliminarUsuario/:id', async function(req, res) {
@@ -25,7 +25,7 @@ router.get('/actualizarEliminarUsuario/:id', async function(req, res) {
     if(error){console.log("Error al buscar en Base de Datos "+error);}
     else{
       let elemento = fila[0];
-      res.render("editarEliminarUsuario", {elemento : elemento});
+      res.render("Administrador/editarUsuario", {elemento : elemento});
     }
   })
   
@@ -42,26 +42,28 @@ router.get('/leerUsuarios', function(req, res) {
         filas.forEach(element => {
           array.push(element);
         });
-        res.render("pagina-crudUsuarios", {arrayFilas : array});
+        res.render("Administrador/pagina-crudUsuarios", {arrayFilas : array});
       }
     })
     
     
     });
     
-router.post('/eliminar/:idE', async function(req, res) {
-
-    const {idE} = req.params;
-    let str = `DELETE FROM usuarios WHERE id=`+idE
-    await db.run(str, function(err) {
-    if (err) {
-        return console.error("Error al eliminar"+err.message);
+router.get('/eliminar/:idE', function(req, res) {
+  let idE = req.params;
+  let str = `DELETE FROM usuarios WHERE id=`+idE.idE;
+  db.run(str, (error)=>{
+    if(error){
+      console.log("Error al eliminar"+error.message)
     }else{
-        console.log("Eliminado")
-        res.redirect("/leerUsuarios")
+      console.log("Eliminado");
+      res.redirect("/leerUsuarios")
     }
-  });
-    });
+  })
+  console.log(idE.idE);
+ 
+  
+});
       
 router.post('/crearUsuario', function(req, res) {
     
@@ -96,8 +98,51 @@ router.post('/actualizar/:id', function(req, res) {
       else{console.log("Usuario actualizado con exito"); res.redirect("/leerUsuarios")}
 
   })
+
+
   
 });
 
 
+
+router.post('/autorizar', async function(req, res) {
+  let emailIngresar = req.body.email;
+  let passwordIngresar = req.body.pass
+  let str = "SELECT * FROM usuarios WHERE correo ='"+emailIngresar+"'AND contraseña='"+passwordIngresar+"'";
+
+  db.all(str, (error, filas)=>{
+    let array = [];
+    if(error){console.log("Error al buscar/autenticar en Base de Datos "+error);}
+    else{
+      filas.forEach(element => {
+        array.push(element);
+      });
+    }
+    
+    if(array.length > 0){
+      if(array[0].rol == "Admin"){
+        let nom = array[0].nombre;
+        res.render('Administrador/inicio-administrador', {nom : nom});
+      }
+     
+      
+    }else {
+      res.send('Incorrect Username and/or Password!');
+    }
+
+    res.end();
+
+
+
+  })
+  
+
+  
+});
+
+
+
+
+
 module.exports = router;
+

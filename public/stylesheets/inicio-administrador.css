@@ -26,6 +26,7 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 20px;
+    text-align: center;
 }
 
 .contenidoAdmin__titulo{
@@ -83,8 +84,10 @@ body{
     height: 1.16em;
 }
 
+
 .contenedorAdminUsuario_caja{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -160,20 +163,22 @@ th, td{
     border-radius: 10px;
 }
 
+.contenedorAdminUsuario__linkAgregarUsuario{
+    font-size: 1em;
+}
+
 a{
     text-decoration: none;
 }
 
 .enlace_actualizar{
     color: #000;
-    font-size: 1.1em;
     border-right: 1px solid black;
     text-align: center;
 }
 
 .enlace_eliminar{
     color: rgb(255, 1, 1);
-    font-size: 1.1em;
     border-left: 1px solid black;
 }
 
@@ -192,6 +197,7 @@ footer{
         height: auto;
         max-width: 50%;
     }
+    
     
     .contenedorAdminProducto{
         font-size: 35px;
@@ -228,6 +234,12 @@ footer{
     .registro-producto__form{
         padding: 2em;
     }
+
+    
+    footer{
+        width: 100%;
+    }
+   
 
 }
 

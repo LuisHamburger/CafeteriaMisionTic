@@ -6,10 +6,10 @@ var logger = require('morgan');
 
 //Llamar las rutas aquí
 
-var paginaInicioRouter = require('./routes/pagina-inicio');
-var paginaUsuarioRouter = require('./routes/pagina-usuario');
+var paginaInicioRouter = require('./routes/pagina-bienvenida');
+var paginaUsuarioRouter = require('./routes/inicio-administrador');
 var CrudUsuarioRouter = require('./routes/crudUsuario');
-
+var CrudProductoRouter = require('./routes/crudProducto');
 var app = express();
 
 // view engine setup
@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', paginaInicioRouter);
 app.use('/', paginaUsuarioRouter);
 app.use('/', CrudUsuarioRouter);
+app.use('/', CrudProductoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
