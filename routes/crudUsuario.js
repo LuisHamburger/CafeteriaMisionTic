@@ -16,7 +16,7 @@ router.get('/nuevoUsuario', function(req, res) {
     res.render("Administrador/registro-usuarios")
 });
 
-router.get('/actualizarEliminarUsuario/:id', async function(req, res) {
+router.get('/actualizarUsuario/:id', async function(req, res) {
 
   let {id} = req.params;
   let str = "SELECT * FROM usuarios WHERE id="+ id;
@@ -49,7 +49,7 @@ router.get('/leerUsuarios', function(req, res) {
     
     });
     
-router.get('/eliminar/:idE', function(req, res) {
+router.get('/eliminarUsuario/:idE', function(req, res) {
   let idE = req.params;
   let str = `DELETE FROM usuarios WHERE id=`+idE.idE;
   db.run(str, (error)=>{
@@ -84,7 +84,7 @@ router.post('/crearUsuario', function(req, res) {
     
 });
 
-router.post('/actualizar/:id', function(req, res) {
+router.post('/actualizarU/:id', function(req, res) {
   let {id} = req.params;
   let name = req.body.name;
   let email = req.body.email;

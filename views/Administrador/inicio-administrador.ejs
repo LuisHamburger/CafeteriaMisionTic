@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/dec7d290de.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/inicio-administrador.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="/stylesheets/normalize.css">
     <title>Administrador</title>
@@ -26,10 +24,10 @@
 
             <div class="contenidoAdmin__opciones__caja">
                 <img class="contenidoAdmin__opciones__caja__img" src="/images/Inventario2.png" alt="">
-                <button class="contenidoAdmin__opciones__caja__btn" id="btnAdministrarProductos">Administrar Productos</button>
+               <a href="/leerProductos"><button class="contenidoAdmin__opciones__caja__btn" id="btnAdministrarProductos">Administrar Productos</button></a> 
             </div>
         </div>
-   
+   </section>
     <footer>
         <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web <br> &copy; 2021</p>
     </footer>
@@ -37,9 +35,6 @@
 <script>
     const btnAdministrarProducto = document.getElementById("btnAdministrarProductos");
     const btnAdministrarUsuarios = document.getElementById("btnAdministrarUsuarios");
-
     btnAdministrarUsuarios.addEventListener("click", ()=>{
-
     });
-
 </script>

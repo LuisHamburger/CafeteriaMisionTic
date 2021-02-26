@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/dec7d290de.js" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="/stylesheets/inicio-administrador.css">
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <title>Registrar Producto</title>
+</head>
+
+<div class="contenedor">
+    <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
+   
+
+    <div class="registro-producto" >
+
+            <% let nom = elemento.nombre %>
+            <% let cant = elemento.cantidad %>
+            <% let srcIm = elemento.srcImagen %>            
+            <% refA = "/actualizarP/"+elemento.id  %>
+
+        <aside class="col-sm-4" >
+            <div class="card cuerpo2__formSesion">
+            <article class="card-body">
+                <h4 class="card-title text-center mb-4 mt-1" style="font-size: 35px;">EDITAR PRODUCTO</h4>
+                <hr>
+                <form method="POST" class=""  enctype="multipart/form-data"  action=<%=refA%> >
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fas fa-coffee"></i> </span>
+                     </div>
+                    <input name="nombreProducto" class="form-control" required placeholder="Nombre del Producto" type="text" value=<%=nom%>>
+                </div> <!-- input-group.// -->
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                     </div>
+                    <input class="form-control" placeholder="Inventario" type="number" required name="stock" value=<%=cant%>>
+                </div> <!-- input-group.// -->
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-file-archive"></i></span>
+                         </div>
+                        <input class="form-control"  type="file" name="image" required >
+                    </div> <!-- input-group.// -->
+                    </div> <!-- form-group// -->
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" style="background-color: #CBAF89 !important; color: black;"> Actualizar </button>
+                </div> <!-- form-group// -->
+                </form>
+            </article>
+            </div> <!-- card.// -->
+                </aside> <!-- col.// -->
+                
+    </div>
+    <footer>
+        <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web <br> &copy; 2021</p>
+    </footer>
+</div>

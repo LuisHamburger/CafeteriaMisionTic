@@ -3,26 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
     <script src="https://kit.fontawesome.com/dec7d290de.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="/stylesheets/pagina-inicio.css">
     <link rel="stylesheet" href="/stylesheets/normalize.css">
     <title>CoffeCo</title>
 </head>
+
 <div class="contenedor">
     <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
+
     <div class="cuerpo1">
-        <h1 class="cuerpo1__titulo">Software ideal para la gesti&oacute;n <br> de inventarios.</h1><button class="cuerpo1__btnComenzar">&iexcl;Comieza ya!</button>
+        <h1 class="cuerpo1__titulo">Software ideal para la gesti&oacute;n <br> de inventarios.</h1>
+        <button class="cuerpo1__btnComenzar">&iexcl;Comieza ya!</button>
     </div>
-    <div class="cuerpo2" hidden="">
-        <form class="cuerpo2__formSesion" action="/autorizar" method="POST">
-            <h1 class="cuerpo2__formSesion__h1">Iniciar Sesi&oacute;n</h1><input class="cuerpo2__formSesion__input" type="email" placeholder="Email" name="email"><input class="cuerpo2__formSesion__input" type="password" placeholder="Contraseña" name="pass">
-            <div><input class="cuerpo2__formSesion__input--checkbox" type="checkbox"> Recuerdame</div><button class="cuerpo2__formSesion__btnIngresar">Ingresar</button>
-        </form>
+    <div class="cuerpo2" hidden>
+
+        <aside class="col-sm-4" >
+            <div class="card cuerpo2__formSesion">
+            <article class="card-body">
+                <h4 class="card-title text-center mb-4 mt-1" style="font-size: 35px;">INICIAR SESIÓN</h4>
+                <hr>
+                <p class="text-success text-center" style="color: #4f1f0f !important;">Bienvenido a CoffeCo</p>
+                <form action="/autorizar" method="POST" class="">
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                     </div>
+                    <input name="email" class="form-control" placeholder="Correo Electronico / Email" type="email">
+                </div> <!-- input-group.// -->
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+                     </div>
+                    <input class="form-control" placeholder="******" type="password" name="pass">
+                </div> <!-- input-group.// -->
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" style="background-color: #CBAF89 !important; color: black;"> Ingresar </button>
+                </div> <!-- form-group// -->
+                <p class="text-center" ><a href="#" class="btn" style="color: #4f1f0f !important;">¿Olvidaste tu contraseña?</a></p>
+                </form>
+            </article>
+            </div> <!-- card.// -->
+                </aside> <!-- col.// -->
     </div>
+    
     <footer>
         <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web. <br> &copy; 2021</p>
     </footer>

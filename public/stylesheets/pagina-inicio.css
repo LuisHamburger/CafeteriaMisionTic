@@ -16,6 +16,8 @@ body{
     align-items: center;
 }
 
+
+
 .cabecera__imagen{
     height: auto;
     max-width: 100%;
@@ -71,45 +73,10 @@ body{
     animation-duration: 1s;
 }
 
-.cuerpo2__formSesion{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 12em;
-    padding: 0.5em;
-    border-radius: 20px;
-    background-color: #CBAF89;
-    opacity: 0.9;
-   
-}
-
-.cuerpo2__formSesion__input, .cuerpo2__formSesion__input--checkbox{
-    margin: 15px 0;
-    border: none;
-    border-bottom: 2px solid black;
-    background-color: transparent;
-}
-
-.cuerpo2__formSesion__btnIngresar{
-    margin: 15px 0;
-    border: none;
-    outline: none;
-    border: 2px solid black;
-    background-color: transparent;
-    transition: background-color, border-radius;
-    transition-duration: 0.5s;
-}
-
-
-.cuerpo2__formSesion__input::placeholder{
-    color: #000;
-}
-.cuerpo2__formSesion__btnIngresar:hover{
+.cuerpo2__formSesion{  
+    opacity: 0.85;
     background-color: #fff;
-    border-radius: 10px;
 }
-
-
 
 
 footer{
@@ -153,7 +120,6 @@ footer{
 
 
 }
-
 
 
 /* ---------------------------------------------------------------------------------------------------------------- */

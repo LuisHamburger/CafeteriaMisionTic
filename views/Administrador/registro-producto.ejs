@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/dec7d290de.js" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="/stylesheets/inicio-administrador.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="/stylesheets/normalize.css">
     <title>Registrar Producto</title>
 </head>
@@ -17,13 +15,45 @@
    
 
     <div class="registro-producto" >
-        <form class="registro-producto__form" action="/crearUsuario" method="POST">
-            <h1 class="registro-producto__form__titulo">Registro de Usuario</h1>
-            <input class="registro-producto__form__input" type="text" name="nameProducto" placeholder="Nombre del Producto" required>
-            <input class="registro-producto__form__input" type="number" name="stock" placeholder="Inventario Disponible" required>
-            <input class="registro-producto__form__input" type="file" name="imgSrc" required>
-            <button class="registro-producto__form__btnRegistrar" type="submit">Registrar<i class="fas fa-plus-square"></i></button>
-        </form>
+
+        <aside class="col-sm-4" >
+            <div class="card cuerpo2__formSesion">
+            <article class="card-body">
+                <h4 class="card-title text-center mb-4 mt-1" style="font-size: 35px;">NUEVO PRODUCTO</h4>
+                <hr>
+                <form action="/crearProducto" method="POST" class="" enctype="multipart/form-data">
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fas fa-coffee"></i> </span>
+                     </div>
+                    <input name="nombreProducto" class="form-control" placeholder="Nombre del Producto" type="text">
+                </div> <!-- input-group.// -->
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                     </div>
+                    <input class="form-control" placeholder="Inventario" type="number" name="stock">
+                </div> <!-- input-group.// -->
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-file-archive"></i></span>
+                         </div>
+                        <input class="form-control"  type="file" name="image" >
+                    </div> <!-- input-group.// -->
+                    </div> <!-- form-group// -->
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" style="background-color: #CBAF89 !important; color: black;"> Ingresar </button>
+                </div> <!-- form-group// -->
+                </form>
+            </article>
+            </div> <!-- card.// -->
+                </aside> <!-- col.// -->
+                
     </div>
     <footer>
         <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web <br> &copy; 2021</p>
