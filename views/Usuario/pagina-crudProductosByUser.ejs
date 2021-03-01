@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/dec7d290de.js" crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="/stylesheets/inicio-administrador.css">
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <title>Gestionar Productos</title>
+</head>
+
+<div class="contenedor">
+    <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
+    
+    <section class="contenedorAdminProducto">
+
+       
+        <div  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="input-group" style="display: flex; justify-content: center; align-items: center;">
+                <div class="form-outline">
+                  <input type="search" id="form1" class="form-control" placeholder="Buscar Producto" style=" width: 80vw; height: 2.5em;" />
+                </div>
+                <button type="button" class="btn btn-primary" ><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+           
+        <div class="contenedorProducto__encontrados">
+                
+            <% for(let dato in arrayFilas){ %>
+            
+                <% src = arrayFilas[dato].srcImagen %>
+                <% src = src.replace("public", "")%>
+                <% refE = "/eliminarProducto/"+arrayFilas[dato].id %>
+                <%  refA = "/actualizarProductoByUser/"+arrayFilas[dato].id %>
+                <div class="card" style="width: 18rem; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 2em;">
+                    <img class="card-img-top" alt="" src=<%=src%> >
+                    <div class="card-body">
+                      <h5 class="card-title"><%= arrayFilas[dato].nombre %></h5>
+                      <p class="card-text">Cantidad: <%= arrayFilas[dato].cantidad %></p>
+                      <a  class="btn btn-primary" href=<%=refA%>>Editar</a>
+                      <a class="btn btn-primary" href=<%=refE%> >Eliminar</a>
+                    </div>
+                </div>
+        
+            
+            <% } %>
+    
+        </div>    
+
+    </section>
+    
+   
+<footer>
+    <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web <br> &copy; 2021</p>
+</footer>
+</div>

@@ -1,8 +1,18 @@
 var express = require('express');
-const { render, response } = require('../app');
 var router = express.Router();
 const sqlite3 = require("sqlite3");
+const bcrypt = require("bcrypt");
+var bodyParser = require('body-parser');
 
+let app = express();
+
+ 
+// create application/json parser
+var jsonParser = bodyParser.json()
+ 
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+ 
 
 let db = new sqlite3.Database('./public/javascripts/database/db.db', (error)=>{
   if (error) {
@@ -48,6 +58,31 @@ router.get('/leerUsuarios', function(req, res) {
     
     
     });
+
+
+
+//No le da la gana de leer el texto recibido 
+router.get('/buscarUsuarios', async function(req, res) { 
+
+  let valor = req.body;
+  console.log(valor)
+  let str = "SELECT * FROM usuarios WHERE nombre LIKE '%"+valor+"%'";
+  console.log(str)
+
+ /* db.all(str, (error, filas)=>{
+    let array = [];
+    if(error){console.log("Error al buscar en Base de Datos "+error);}
+    else{
+      filas.forEach(element => {
+        array.push(element);
+      });
+      console.log(array)
+      res.render("Administrador/pagina-crudUsuarios", {arrayFilas : array});
+    }
+  })*/
+  
+  });
+//-----------------------------------------------      
     
 router.get('/eliminarUsuario/:idE', function(req, res) {
   let idE = req.params;
@@ -65,22 +100,27 @@ router.get('/eliminarUsuario/:idE', function(req, res) {
   
 });
       
-router.post('/crearUsuario', function(req, res) {
+router.post('/crearUsuario', async function(req, res) {
     
     let name = req.body.name;
     let email = req.body.email;
     let password = req.body.pass;
     let rol = req.body.rol;
+    const saltRounds = 10;
+  
 
-    
+    bcrypt.hash(password, saltRounds, function(err, hash) {
 
-    let str = "INSERT INTO usuarios (nombre, correo, contraseña, rol) VALUES ('"+name+"','"+email+"','"+password+"','"+rol+"')";
+      let str = "INSERT INTO usuarios (nombre, correo, contraseña, rol) VALUES ('"+name+"','"+email+"','"+hash+"','"+rol+"')";
 
-    db.run(str, (error)=>{
-        if (error) {return console.log("Error al Insertar "+error.message);}
-        else{console.log("Usuario creado con exito"); res.redirect("/leerUsuarios")}
+      db.run(str, (error)=>{
+          if (error) {return console.log("Error al Insertar "+error.message);}
+          else{console.log("Usuario creado con exito"); res.redirect("/leerUsuarios")}
 
-    })
+      })
+      
+  });
+      
     
 });
 
@@ -103,45 +143,27 @@ router.post('/actualizarU/:id', function(req, res) {
   
 });
 
+//-----------------------------------------------------------------------------------------------------------
+//********************************************************************************************************** */
 
-
-router.post('/autorizar', async function(req, res) {
+router.post('/autorizar', async function(req, res){
   let emailIngresar = req.body.email;
   let passwordIngresar = req.body.pass
-  let str = "SELECT * FROM usuarios WHERE correo ='"+emailIngresar+"'AND contraseña='"+passwordIngresar+"'";
+  let str = "SELECT * FROM usuarios WHERE correo ='"+emailIngresar+"'";
 
-  db.all(str, (error, filas)=>{
+  await db.all(str, async (error, filas)=>{
     let array = [];
     if(error){console.log("Error al buscar/autenticar en Base de Datos "+error);}
-    else{
-      filas.forEach(element => {
-        array.push(element);
-      });
-    }
-    
+    else{ filas.forEach(element => { array.push(element);});}
+
     if(array.length > 0){
-      if(array[0].rol == "Admin"){
-        let nom = array[0].nombre;
-        res.render('Administrador/inicio-administrador', {nom : nom});
-      }
-     
-      
-    }else {
-      res.send('Incorrect Username and/or Password!');
+      if(await bcrypt.compare(passwordIngresar, array[0].contraseña)){
+        if(array[0].rol =="Admin"){res.render("Administrador/inicio-administrador", {nom: array[0].nombre})}else{res.redirect("/leerProductosByUser")}
+        }else{res.render("pagina-bienvenida")}
     }
+  });
 
-    res.end();
-
-
-
-  })
-  
-
-  
 });
-
-
-
 
 
 module.exports = router;

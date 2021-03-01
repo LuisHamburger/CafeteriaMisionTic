@@ -12,6 +12,7 @@
 
 <div class="contenedor">
     <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
+    
     <section class="contenedorAdminProducto">
 
         <div  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -29,6 +30,7 @@
             <% for(let dato in arrayFilas){ %>
             
                 <% src = arrayFilas[dato].srcImagen %>
+                <% console.log(src) %>
                 <% src = src.replace("public", "")%>
                 <% refE = "/eliminarProducto/"+arrayFilas[dato].id %>
                 <%  refA = "/actualizarProducto/"+arrayFilas[dato].id %>

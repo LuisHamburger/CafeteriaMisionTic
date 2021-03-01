@@ -41,7 +41,7 @@ router.post('/crearProducto', upload.single("image"),function(req, res) {
 
     db.run(str, (error)=>{
         if (error) {return console.log("Error al Insertar "+error.message);}
-        else{console.log("Producto creado con exito"); res.redirect("/nuevoProducto")}
+        else{console.log("Producto creado con exito"); res.redirect("/leerProductos")}
 
     })
 
@@ -63,7 +63,26 @@ router.get('/leerProductos', async function(req, res) {
     })
     
     
-    });
+});
+
+
+router.get('/leerProductosByUser', async function(req, res) {
+
+  let str = "SELECT * FROM productos";
+  
+  await db.all(str, (error, filas)=>{
+    let array = [];
+    if(error){console.log("Error al buscar en Base de Datos "+error);}
+    else{
+      filas.forEach(element => {
+        array.push(element);
+      });
+      res.render("Usuario/pagina-crudProductosByUser", {arrayFilas : array});
+    }
+  })
+  
+  
+});
 
 
 
@@ -98,6 +117,22 @@ router.get('/actualizarProducto/:id', async function(req, res) {
   
 });
 
+
+router.get('/actualizarProductoByUser/:id', async function(req, res) {
+
+  let {id} = req.params;
+  let str = "SELECT * FROM productos WHERE id="+ id;
+    
+  await db.all(str, (error, fila)=>{
+    if(error){console.log("Error al buscar en Base de Datos "+error);}
+    else{
+      let elemento = fila[0];
+      res.render("Usuario/editarProductoByUser", {elemento : elemento});
+    }
+  })
+  
+});
+
 router.post('/actualizarP/:id', upload.single("image"),function(req, res) {
   let {id} = req.params;
   let name = req.body.nombreProducto;
@@ -110,6 +145,21 @@ router.post('/actualizarP/:id', upload.single("image"),function(req, res) {
   db.run(str, (error)=>{
       if (error) {return console.log("Error al Actualizar "+error.message);}
       else{console.log("Producto actualizado con exito"); res.redirect("/leerProductos")}
+
+  })
+});
+
+router.post('/actualizarPByUser/:id', upload.single("image"),function(req, res) {
+  let {id} = req.params;
+  let name = req.body.nombreProducto;
+  let stock = req.body.stock;
+
+
+  let str = "UPDATE productos SET nombre='"+name+"', cantidad='"+stock+"' WHERE id="+id;
+
+  db.run(str, (error)=>{
+      if (error) {return console.log("Error al Actualizar "+error.message);}
+      else{console.log("Producto actualizado con exito"); res.redirect("/leerProductosByUser")}
 
   })
 });

@@ -84,6 +84,7 @@ thead{
     font-size: 16px;
 }
 th, td{
+    text-align: center;
     border-bottom: 1px solid black;
     border-right:  1px solid black ;
     padding: 0.5em;
@@ -128,7 +129,19 @@ th, td{
     flex-wrap: wrap;
 }
 
-
+.btnFlotante{
+    background-color: #CBAF89;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    box-shadow: #000;
+    left:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
 
 footer{
     text-align: center;

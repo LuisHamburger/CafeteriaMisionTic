@@ -17,6 +17,10 @@
         <h2 class="contenidoAdmin__titulo"><%=nom%></h2>
         <div class="contenidoAdmin__opciones">
 
+            <div class="btnFlotante">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+
             <div class="contenidoAdmin__opciones__caja">
                 <img class="contenidoAdmin__opciones__caja__img" src="/images/Usuarios.png" alt="">
                <a href="/leerUsuarios"><button class="contenidoAdmin__opciones__caja__btn" id="btnAdministrarUsuarios">Administrar Usuarios</button></a> 
@@ -37,4 +41,10 @@
     const btnAdministrarUsuarios = document.getElementById("btnAdministrarUsuarios");
     btnAdministrarUsuarios.addEventListener("click", ()=>{
     });
+
+    const btnFlotante = document.querySelector(".btnFlotante");
+    btnFlotante.addEventListener("click", ()=>{
+        window.history.back();
+    })
 </script>
+

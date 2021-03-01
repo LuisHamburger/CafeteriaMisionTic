@@ -12,9 +12,11 @@
 
 <div class="contenedor">
     <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
-   
 
+   
     <div class="registro-usuario" >
+
+        
         <aside class="col-sm-4" >
             <div class="card cuerpo2__formSesion">
             <article class="card-body">
@@ -51,10 +53,10 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-male"></i></span>
                          </div>
-                         <select class="form-control" aria-label="Default select example">
+                         <select class="form-control" aria-label="Default select example" name="rol">
                             <option selected>Selecciona una opción</option>
-                            <option value="1">Administrador</option>
-                            <option value="2">Usuario</option>
+                            <option value="Admin">Administrador</option>
+                            <option value="User" selected>Usuario</option>
                           </select>
                     </div> <!-- input-group.// -->
                     </div> <!-- form-group// -->
@@ -70,4 +72,11 @@
     <footer>
         <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web <br> &copy; 2021</p>
     </footer>
+ 
 </div>
+<script>
+    const btnFlotante = document.querySelector(".btnFlotante");
+    btnFlotante.addEventListener("click", ()=>{
+        window.history.back();
+    })
+</script>
