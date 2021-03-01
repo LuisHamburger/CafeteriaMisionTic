@@ -61,15 +61,13 @@ router.get('/leerUsuarios', function(req, res) {
 
 
 
-//No le da la gana de leer el texto recibido 
-router.get('/buscarUsuarios', async function(req, res) { 
+router.post('/buscarUsuarios', async function(req, res) { 
 
-  let valor = req.body;
-  console.log(valor)
+  let valor = req.body.valorBuscar;
+ 
   let str = "SELECT * FROM usuarios WHERE nombre LIKE '%"+valor+"%'";
-  console.log(str)
-
- /* db.all(str, (error, filas)=>{
+ 
+  await db.all(str, (error, filas)=>{
     let array = [];
     if(error){console.log("Error al buscar en Base de Datos "+error);}
     else{
@@ -79,10 +77,10 @@ router.get('/buscarUsuarios', async function(req, res) {
       console.log(array)
       res.render("Administrador/pagina-crudUsuarios", {arrayFilas : array});
     }
-  })*/
+  })
   
   });
-//-----------------------------------------------      
+//---------------------------------------------------------------------------------------------------------      
     
 router.get('/eliminarUsuario/:idE', function(req, res) {
   let idE = req.params;
@@ -158,7 +156,7 @@ router.post('/autorizar', async function(req, res){
 
     if(array.length > 0){
       if(await bcrypt.compare(passwordIngresar, array[0].contraseña)){
-        if(array[0].rol =="Admin"){res.render("Administrador/inicio-administrador", {nom: array[0].nombre})}else{res.redirect("/leerProductosByUser")}
+        if(array[0].rol =="Admin"){res.redirect("/Administrador")}else{res.redirect("/leerProductosByUser")}
         }else{res.render("pagina-bienvenida")}
     }
   });

@@ -11,14 +11,14 @@
 </head>
 
 <div class="contenedor">
-    <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
+    <header class="cabecera"><a href="/Administrador"><img class="cabecera__img" src="/images/logocafe.png" alt=""></a></header>
     
     
     <div class="contenedorAdminUsuario">
 
         <div class="contenedorAdminUsuario__busqueda"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-            <form class="input-group" method="GET" action="/buscarUsuarios" style="display: flex; justify-content: center; align-items: center;">
+            <form class="input-group" method="POST" action="/buscarUsuarios" style="display: flex; justify-content: center; align-items: center;">
                 <div class="form-outline">
                   <input type="text"  name="valorBuscar"  class="form-control" placeholder="Buscar Usuario" style=" width: 80vw; height: 2.5em;" />
                 </div>

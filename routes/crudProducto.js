@@ -65,7 +65,45 @@ router.get('/leerProductos', async function(req, res) {
     
 });
 
+router.post('/buscarProductos', async function(req, res) { 
 
+  let valor = req.body.valorBuscar;
+ 
+  let str = "SELECT * FROM productos WHERE nombre LIKE '%"+valor+"%'";
+ 
+  await db.all(str, (error, filas)=>{
+    let array = [];
+    if(error){console.log("Error al buscar en Base de Datos "+error);}
+    else{
+      filas.forEach(element => {
+        array.push(element);
+      });
+      console.log(array)
+      res.render("Administrador/pagina-crudProductos", {arrayFilas : array});
+    }
+  })
+  
+  });
+
+router.post('/buscarProductosByUser', async function(req, res) { 
+
+  let valor = req.body.valorBuscar;
+  
+  let str = "SELECT * FROM productos WHERE nombre LIKE '%"+valor+"%'";
+  
+  await db.all(str, (error, filas)=>{
+    let array = [];
+    if(error){console.log("Error al buscar en Base de Datos "+error);}
+    else{
+      filas.forEach(element => {
+        array.push(element);
+      });
+      console.log(array)
+      res.render("Usuario/pagina-crudProductosByUser", {arrayFilas : array});
+    }
+  })
+  
+  });
 router.get('/leerProductosByUser', async function(req, res) {
 
   let str = "SELECT * FROM productos";
