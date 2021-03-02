@@ -6,6 +6,8 @@ let multer = require("multer");
 const app = express();
 var path = require('path');
 
+//----------------------------BASE DE DATOS------------------------------------------------------------------
+
 let db = new sqlite3.Database('./public/javascripts/database/db.db', (error)=>{
   if (error) {
     console.error("Ha ocurrido un error: " + error.message);
@@ -14,6 +16,7 @@ let db = new sqlite3.Database('./public/javascripts/database/db.db', (error)=>{
   }    
 });
 
+//----------------------------ALMACENAR IMAGEN------------------------------------------------------------------
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join("./public/images/productos"))
@@ -26,11 +29,28 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
  
-
+//----------------------------RUTAS GENERALES------------------------------------------------------------------
 
 router.get('/nuevoProducto', function(req, res) {  
     res.render("Administrador/registro-producto");
 });
+router.post('/buscarProductos', async function(req, res) { 
+
+  let valor = req.body.valorBuscar;
+ 
+  res.redirect("/leerProductos/"+valor)
+  
+  });
+
+router.post('/buscarProductosByUser', async function(req, res) { 
+
+  let valor = req.body.valorBuscar;
+  res.redirect("/leerProductosByUser/"+valor);
+  
+  
+  });
+
+//----------------------------CRUD PRODUCTOS------------------------------------------------------------------
 
 router.post('/crearProducto', upload.single("image"),function(req, res) {
     let nombre = req.body.nombreProducto;
@@ -41,13 +61,16 @@ router.post('/crearProducto', upload.single("image"),function(req, res) {
 
     db.run(str, (error)=>{
         if (error) {return console.log("Error al Insertar "+error.message);}
-        else{console.log("Producto creado con exito"); res.redirect("/leerProductos")}
+        else{console.log("Producto creado con exito"); res.redirect("/leerProductos/all")}
 
     })
 
 });
 
-router.get('/leerProductos', async function(req, res) {
+router.get('/leerProductos/:all', async function(req, res) {
+
+
+  if(req.params.all == "all"){
 
     let str = "SELECT * FROM productos";
     
@@ -61,67 +84,68 @@ router.get('/leerProductos', async function(req, res) {
         res.render("Administrador/pagina-crudProductos", {arrayFilas : array});
       }
     })
+
+  }else{
+
+    let valor = req.params.all;
+    let str = "SELECT * FROM productos WHERE nombre LIKE '%"+valor+"%'";
+  
+    await db.all(str, (error, filas)=>{
+      let array = [];
+      if(error){console.log("Error al buscar en Base de Datos "+error);}
+      else{
+        filas.forEach(element => {
+          array.push(element);
+        });
+        console.log(array)
+        res.render("Administrador/pagina-crudProductos", {arrayFilas : array});
+      }
+     })
+
+  }
+    
     
     
 });
 
-router.post('/buscarProductos', async function(req, res) { 
 
-  let valor = req.body.valorBuscar;
- 
-  let str = "SELECT * FROM productos WHERE nombre LIKE '%"+valor+"%'";
- 
-  await db.all(str, (error, filas)=>{
-    let array = [];
-    if(error){console.log("Error al buscar en Base de Datos "+error);}
-    else{
-      filas.forEach(element => {
-        array.push(element);
-      });
-      console.log(array)
-      res.render("Administrador/pagina-crudProductos", {arrayFilas : array});
-    }
-  })
-  
-  });
+router.get('/leerProductosByUser/:all', async function(req, res) {
 
-router.post('/buscarProductosByUser', async function(req, res) { 
+  if(req.params.all == "all"){
+    let str = "SELECT * FROM productos";
+  
+    await db.all(str, (error, filas)=>{
+      let array = [];
+      if(error){console.log("Error al buscar en Base de Datos "+error);}
+      else{
+        filas.forEach(element => {
+          array.push(element);
+        });
+        res.render("Usuario/pagina-crudProductosByUser", {arrayFilas : array});
+      }
+    })
 
-  let valor = req.body.valorBuscar;
-  
-  let str = "SELECT * FROM productos WHERE nombre LIKE '%"+valor+"%'";
-  
-  await db.all(str, (error, filas)=>{
-    let array = [];
-    if(error){console.log("Error al buscar en Base de Datos "+error);}
-    else{
-      filas.forEach(element => {
-        array.push(element);
-      });
-      console.log(array)
-      res.render("Usuario/pagina-crudProductosByUser", {arrayFilas : array});
-    }
-  })
-  
-  });
-router.get('/leerProductosByUser', async function(req, res) {
+  }else{
+    let valor = req.params.all;
+    let str = "SELECT * FROM productos WHERE nombre LIKE '%"+valor+"%'";
+    
+    await db.all(str, (error, filas)=>{
+      let array = [];
+      if(error){console.log("Error al buscar en Base de Datos "+error);}
+      else{
+        filas.forEach(element => {
+          array.push(element);
+        });
+        console.log(array)
+        res.render("Usuario/pagina-crudProductosByUser", {arrayFilas : array});
+      }
+    })
 
-  let str = "SELECT * FROM productos";
+  }
   
-  await db.all(str, (error, filas)=>{
-    let array = [];
-    if(error){console.log("Error al buscar en Base de Datos "+error);}
-    else{
-      filas.forEach(element => {
-        array.push(element);
-      });
-      res.render("Usuario/pagina-crudProductosByUser", {arrayFilas : array});
-    }
-  })
   
   
 });
-
 
 
 router.get('/eliminarProducto/:idE', function(req, res) {
@@ -132,7 +156,7 @@ router.get('/eliminarProducto/:idE', function(req, res) {
       console.log("Error al eliminar"+error.message)
     }else{
       console.log("Eliminado");
-      res.redirect("/leerProductos")
+      res.redirect("/leerProductos/all")
     }
   })
   console.log(idE.idE);
@@ -182,7 +206,7 @@ router.post('/actualizarP/:id', upload.single("image"),function(req, res) {
 
   db.run(str, (error)=>{
       if (error) {return console.log("Error al Actualizar "+error.message);}
-      else{console.log("Producto actualizado con exito"); res.redirect("/leerProductos")}
+      else{console.log("Producto actualizado con exito"); res.redirect("/leerProductos/all")}
 
   })
 });
@@ -197,7 +221,7 @@ router.post('/actualizarPByUser/:id', upload.single("image"),function(req, res) 
 
   db.run(str, (error)=>{
       if (error) {return console.log("Error al Actualizar "+error.message);}
-      else{console.log("Producto actualizado con exito"); res.redirect("/leerProductosByUser")}
+      else{console.log("Producto actualizado con exito"); res.redirect("/leerProductosByUser/all")}
 
   })
 });

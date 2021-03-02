@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="/stylesheets/pagina-inicio.css">
+    <script src="https://kit.fontawesome.com/dec7d290de.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <title>Recuperar Contraseña</title>
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <header class="cabecera"> <a href="/"><img class="cabecera__img" src="/images/logocafe.png" alt=""></a> </header>
+
+        <div class="cuerpo2">
+
+            <aside class="col-sm-4" >
+                <div class="card cuerpo2__formSesion">
+                <article class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1" style="font-size: 35px;">Recuperar Contraseña</h4>
+                    <hr>
+                    <form action="/solicitar" method="POST" class="">
+                    <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input name="email" class="form-control" placeholder="Correo Electronico / Email" required type="email">
+                    </div> <!-- input-group.// -->
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" style="background-color: #CBAF89 !important; color: black;"> Enviar Solicitud </button>
+                    </div> <!-- form-group// -->
+                
+                    </form>
+                </article>
+                </div> <!-- card.// -->
+                    </aside> <!-- col.// -->
+
+            </div>
+        <footer>
+            <p>Luis Miguel Hamburger Meza - Desarrollador de p&aacute;ginas web. <br> &copy; 2021</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+
+
+<% if (mensaje == "true"){%>
+    <script>
+        alert("¡Revisa tu correo electronico!");
+    </script>
+<%}%>
+

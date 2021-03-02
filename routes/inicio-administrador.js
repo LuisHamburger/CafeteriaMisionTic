@@ -14,7 +14,5 @@ res.render("Administrador/inicio-administrador");
 });
 
 
-
-
 module.exports = router;
   

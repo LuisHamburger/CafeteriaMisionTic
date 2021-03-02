@@ -12,9 +12,9 @@
 </head>
 
 <div class="contenedor">
-    <header class="cabecera"><img class="cabecera__img" src="/images/logocafe.png" alt=""></header>
- 
 
+    <header class="cabecera"> <a href="/"><img class="cabecera__img" src="/images/logocafe.png" alt=""></a> </header>
+    
     <div class="cuerpo1">
         <h1 class="cuerpo1__titulo">Software ideal para la gesti&oacute;n <br> de inventarios.</h1>
         <button class="cuerpo1__btnComenzar">&iexcl;Comieza ya!</button>
@@ -47,8 +47,8 @@
                 <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block" style="background-color: #CBAF89 !important; color: black;"> Ingresar </button>
                 </div> <!-- form-group// -->
-                <p class="text-center" ><a href="#" class="btn" style="color: #4f1f0f !important;">¿Olvidaste tu contraseña?</a></p>
                 </form>
+                <p class="text-center" ><a href="/forgot/false" class="btn" style="color: #4f1f0f !important;">¿Olvidaste tu contraseña?</a></p>
             </article>
             </div> <!-- card.// -->
                 </aside> <!-- col.// -->
@@ -73,3 +73,9 @@
     });
 
 </script>
+
+<% if (mensaje){%>
+    <script>
+        alert("¡CORREO Y/O CONTRASEÑA INCORRECTO!");
+    </script>
+<%}%>
