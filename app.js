@@ -4,7 +4,7 @@ var session = require("express-session");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const passport = require('passport');
+
 
 //Llamar las rutas aquí
 
@@ -30,8 +30,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 60000 }
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 //Establecer las rutas aquí
 app.use('/', paginaInicioRouter);
