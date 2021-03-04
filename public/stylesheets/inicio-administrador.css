@@ -136,11 +136,13 @@ th, td{
     height: 45px;
     position: fixed;
     box-shadow: #000;
+    top: 50vh;
     left:0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    z-index: 1000;
 }
 
 footer{

@@ -1,8 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require("express-session");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('passport');
 
 //Llamar las rutas aquí
 
@@ -10,6 +12,7 @@ var paginaInicioRouter = require('./routes/pagina-bienvenida');
 var paginaUsuarioRouter = require('./routes/inicio-administrador');
 var CrudUsuarioRouter = require('./routes/crudUsuario');
 var CrudProductoRouter = require('./routes/crudProducto');
+var autorizacionesDeUsuariosRouter = require('./routes/autorizacionesDeUsuarios');
 var app = express();
 
 // view engine setup
@@ -19,14 +22,23 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser("SosUnCrackHiperSecreto"));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: "SosUnCrackHiperSecreto",
+  resave : false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Establecer las rutas aquí
 app.use('/', paginaInicioRouter);
 app.use('/', paginaUsuarioRouter);
 app.use('/', CrudUsuarioRouter);
 app.use('/', CrudProductoRouter);
+app.use('/', autorizacionesDeUsuariosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
