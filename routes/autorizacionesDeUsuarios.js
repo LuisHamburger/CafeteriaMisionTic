@@ -56,7 +56,7 @@ router.post('/solicitar', async function(req, res) {
     from: '"Recupera tu contraseña CoffeCo" <pruebaproyectosluish@gmail.com>', // sender address
     to: email, // list of receivers
     subject: "Recupera tu contraseña CoffeCo ✔", // Subject line
-    html: '<h2 style="text-align:center;">Recuperar Contraseña</h2> <br> <p>Click <a href="http://localhost:3000/restablecer">aquí</a> para restablecer tu contraseña</p>' // html body
+    html: '<h2 style="text-align:center;">Recuperar Contraseña</h2> <br> <p>Click <a href="https://coffeco.herokuapp.com/restablecer">aquí</a> para restablecer tu contraseña</p>' // html body
     });
 
     res.redirect("/forgot/true")
