@@ -58,8 +58,8 @@ router.post('/crearProducto', upload.single("image"),function(req, res) {
     let nombre = req.body.nombreProducto;
     let stock = req.body.stock;
     let rutaImagen = req.file.path;
-
-    let str = "INSERT INTO productos (nombre, cantidad, srcImagen) VALUES ('"+nombre+"','"+stock+"','"+rutaImagen+"')";
+    let precio = req.body.precio;
+    let str = "INSERT INTO productos (nombre, cantidad, precio, srcImagen) VALUES ('"+nombre+"','"+stock+"','"+precio+"','"+rutaImagen+"')";
 
     db.run(str, (error)=>{
         if (error) {return console.log("Error al Insertar "+error.message);}
@@ -221,9 +221,9 @@ router.post('/actualizarP/:id', upload.single("image"),function(req, res) {
     let name = req.body.nombreProducto;
     let stock = req.body.stock;
     let srcImagen = req.file.path;
+    let precio = req.body.precio
   
-  
-    let str = "UPDATE productos SET nombre='"+name+"', cantidad='"+stock+"', srcImagen='"+srcImagen+"' WHERE id="+id;
+    let str = "UPDATE productos SET nombre='"+name+"', cantidad='"+stock+"', precio ='"+precio+"', srcImagen='"+srcImagen+"' WHERE id="+id;
   
     db.run(str, (error)=>{
         if (error) {return console.log("Error al Actualizar "+error.message);}

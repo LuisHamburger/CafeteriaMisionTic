@@ -17,7 +17,8 @@
     <div class="registro-producto" >
 
             <% let nom = elemento.nombre %>
-            <% let cant = elemento.cantidad %>        
+            <% let cant = elemento.cantidad %>   
+            <% let precio= elemento.precio %>        
             <% refA = "/actualizarPByUser/"+elemento.id  %>
 
         <aside class="col-sm-4" >
@@ -42,6 +43,14 @@
                     <input class="form-control" placeholder="Inventario" type="number" required name="stock" value=<%=cant%>>
                 </div> <!-- input-group.// -->
                 </div> <!-- form-group// -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                         </div>
+                        <input class="form-control" placeholder="Precio" type="number"  name="precio" readonly value=<%=precio%>>
+                    </div> <!-- input-group.// -->
+                    </div> <!-- form-group// -->
                 <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block" style="background-color: #CBAF89 !important; color: black;"> Actualizar </button>
                 </div> <!-- form-group// -->

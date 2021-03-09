@@ -18,7 +18,8 @@
 
             <% let nom = elemento.nombre %>
             <% let cant = elemento.cantidad %>
-            <% let srcIm = elemento.srcImagen %>            
+            <% let srcIm = elemento.srcImagen %> 
+            <% let precio = elemento.precio %>             
             <% refA = "/actualizarP/"+elemento.id  %>
 
         <aside class="col-sm-4" >
@@ -43,6 +44,14 @@
                     <input class="form-control" placeholder="Inventario" type="number" required name="stock" value=<%=cant%>>
                 </div> <!-- input-group.// -->
                 </div> <!-- form-group// -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                         </div>
+                        <input class="form-control" placeholder="Precio" type="number" required name="precio" value=<%=precio%>>
+                    </div> <!-- input-group.// -->
+                    </div> <!-- form-group// -->
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
